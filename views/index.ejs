@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/styles.css">
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="headerfix">
+      <!--Header-->
+      <div class="container my-nav-bar">
+        <header class="d-flex justify-content-center py-3">
+          <h1>Dog Breed Guessing Game</h1>
+        </header>
+      </div>
+    </div>
+
+    <img src="<%=image %>" alt="Dog" width="500px">
+
+    <% if (result === null) { %>
+        <h2> What breed is this? </h2>
+        <div class="d-flex justify-content-center gap-2">
+            <%choices.forEach(choice => { %>
+                <form action="/guess" method="POST">
+                <input type="hidden" name="dogId" value="<%= dog.id%>">
+                    <button class="my-btn btn" type="submit" name="guess" value="<%=choice.id%>">
+                        <%= choice.attributes.name %>
+                    </button>
+                </input>
+                </form>
+            <%});%>
+        </div>
+    <%} else {%>
+        <h2><%= result %> Score: <%= score %> / <%= guesses %></h2>
+        <h3>The correct answer was:</h3>
+        <h2><%= dog.attributes.name %></h2>
+        <p><%= dog.attributes.description %></p>
+        <div class="d-flex justify-content-center gap-2">
+        <form action="/" method="GET">
+            <button class="my-btn btn" type="submit">Next Dog!</button>
+        </form>
+        </div>
+    <%}%>
+</div>
+    
+</div>
+
+  </body>
+</html>
